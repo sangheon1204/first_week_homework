@@ -1,8 +1,8 @@
 package com.sparta.homework.controller;
 
+import com.sparta.homework.dto.GetPostDto;
 import com.sparta.homework.dto.PostRequestDto;
 import com.sparta.homework.entity.Post;
-import com.sparta.homework.mappinginterface.MappingInterface;
 import com.sparta.homework.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,24 +23,24 @@ public class PostController {
 
     @Transactional(readOnly = true)     //전체 목록 조회 기능
     @GetMapping ("/api/posts")
-    public List<MappingInterface> getPosts(){
+    public List<GetPostDto> getPosts(){
         return postService.getPosts();
     }
 
     @Transactional
     @GetMapping ("/api/posts/title/{title}")  // 제목으로 조회
-    public List<MappingInterface> getPostsByTitle(@PathVariable String title) {
-        return postService.getPostsBytitle(title);
+    public List<GetPostDto> getPostsByTitle(@PathVariable String title) {
+        return postService.getPostsByTitle(title);
     }
     @Transactional
     @GetMapping("/api/posts/name/{name}")  //이름으로 조회
-    public List<MappingInterface> getPostsByName(@PathVariable String name) {
-        return postService.getPostsByname(name);
+    public List<GetPostDto> getPostsByName(@PathVariable String name) {
+        return postService.getPostsByName(name);
     }
 
     @Transactional             //id값을 받아서 수정 -> 입력한 비밀번호 확인 후 수정
     @PutMapping("/api/posts/{id}")
-    public Post updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
+    public UpdatePostDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
        return postService.update(id,requestDto);
     }
 

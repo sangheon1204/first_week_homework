@@ -1,7 +1,10 @@
 package com.sparta.homework.entity;
 
+import com.sparta.homework.controller.UpdatePostDto;
 import com.sparta.homework.dto.PostRequestDto;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +15,7 @@ import javax.persistence.*;
 
 @Getter
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends Timestamped{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
