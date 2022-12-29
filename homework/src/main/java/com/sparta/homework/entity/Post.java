@@ -1,10 +1,8 @@
 package com.sparta.homework.entity;
 
-import com.sparta.homework.controller.UpdatePostDto;
 import com.sparta.homework.dto.PostRequestDto;
 
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,9 +39,16 @@ public class Post extends Timestamped{
 
     }
 
-    public void update(PostRequestDto requestDto) {         //내용 수정
-        this.name = requestDto.getName();
-        this.title = requestDto.getTitle();
-        this.contents = requestDto.getContents();
+    public void update(PostRequestDto requestDto) {//내용 수정
+        if(requestDto.getName() != null ) {
+            this.name = requestDto.getName();
+        }
+        if(requestDto.getTitle() != null) {
+            this.title = requestDto.getTitle();
+        }
+        if(requestDto.getContents() != null) {
+            this.contents = requestDto.getContents();
+        }
+
     }
 }

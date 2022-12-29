@@ -1,7 +1,6 @@
 package com.sparta.homework.controller;
 
-import com.sparta.homework.dto.GetPostDto;
-import com.sparta.homework.dto.PostRequestDto;
+import com.sparta.homework.dto.*;
 import com.sparta.homework.entity.Post;
 import com.sparta.homework.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -15,38 +14,34 @@ import java.util.List;
 public class PostController {
     private final PostService postService;
 
-    @Transactional //생성 기능
     @PostMapping ("/api/posts")
-    public Post creatPost( @RequestBody PostRequestDto requestDto) {
+    public PostResponseDto creatPost(@RequestBody PostRequestDto requestDto) {
         return postService.createPost(requestDto);
     }
 
-    @Transactional(readOnly = true)     //전체 목록 조회 기능
     @GetMapping ("/api/posts")
-    public List<GetPostDto> getPosts(){
+    public List<PostResponseDto> getPosts(){
         return postService.getPosts();
     }
 
-    @Transactional
     @GetMapping ("/api/posts/title/{title}")  // 제목으로 조회
-    public List<GetPostDto> getPostsByTitle(@PathVariable String title) {
+    public List<PostResponseDto> getPostsByTitle(@PathVariable String title) {
         return postService.getPostsByTitle(title);
     }
-    @Transactional
+
     @GetMapping("/api/posts/name/{name}")  //이름으로 조회
-    public List<GetPostDto> getPostsByName(@PathVariable String name) {
+    public List<PostResponseDto> getPostsByName(@PathVariable String name) {
         return postService.getPostsByName(name);
     }
 
-    @Transactional             //id값을 받아서 수정 -> 입력한 비밀번호 확인 후 수정
-    @PutMapping("/api/posts/{id}")
-    public UpdatePostDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
+
+    @PutMapping("/api/posts/{id}") //id값을 받아서 수정 -> 입력한 비밀번호 확인 후 수정
+    public PostResponseDto updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
        return postService.update(id,requestDto);
     }
 
-    @Transactional
     @DeleteMapping("/api/posts/{id}")
-    public String deletePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
+    public DeleteDto deletePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
         return postService.delete(id,requestDto);
     }
 

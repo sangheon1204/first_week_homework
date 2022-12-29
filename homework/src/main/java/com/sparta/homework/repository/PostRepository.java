@@ -1,5 +1,4 @@
 package com.sparta.homework.repository;
-import com.sparta.homework.dto.GetPostDto;
 import com.sparta.homework.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 
