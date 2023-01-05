@@ -6,5 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DeleteDto {
-    private boolean success;
+    private String msg;
+    private int statusCode;
 }
